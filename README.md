@@ -43,6 +43,8 @@ https://www.udacity.com/course/sensor-fusion-engineer-nanodegree--nd313
 | 9.68      | 10.4                       | 10.34                      | 9.21                     | 12.3                       | 9.81                  | 8.19                  | 10.42               | 11.4                  | 9.36                   | 8.95                   | 8.91                 | 10.77                  | 12.05                | 9.73                   | 9.18                 | 9.55                   | 9.06                   | 9.46                  | 9.19                  | 8.79                  |
 | 8.4       | 9.68                       | 8.41                       | 7.89                     | 9.25                       | 12.06                 | 12.67                 | 10.74               | 11.81                 | 11.73                  | 11.29                  | 12.08                | 9.7                    | 9.49                 | 9.47                   | 9.32                 | 10.05                  | 9.21                   | 8.74                  | 9.05                  | 10.56                 |
 
+![images/all_combinations.png](images/all_combinations.png)
+
 **Top 5 combinations of detectors and descriptors**
 
 | TTC_LIDAR | TTC_CAMERA_SHITOMASI_BRISK | TTC_CAMERA_AKAZE_BRIEF | TTC_CAMERA_AKAZE_ORB | TTC_CAMERA_AKAZE_AKAZE | TTC_CAMERA_SIFT_BRISK | AVERAGE_TTC |
