@@ -68,6 +68,8 @@ https://www.udacity.com/course/sensor-fusion-engineer-nanodegree--nd313
 | 9.68      | 10.4                       | 9.73                   | 9.18                 | 9.06                   | 9.46                  | 9.59        |
 | 8.4       | 9.68                       | 9.47                   | 9.32                 | 9.21                   | 8.74                  | 9.14        |
 
+![images/top_5_combinations.png](images/top_5_combinations.png)
+
 -----------------------------------------------------------------------------------
 
 # SFND 3D Object Tracking
