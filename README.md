@@ -19,6 +19,8 @@ https://www.udacity.com/course/sensor-fusion-engineer-nanodegree--nd313
 
 ![images/Final_Results_TTC.png](images/Final_Results_TTC.png)
 
+![images/Object_classification.png](images/Object_classification.png)
+
 **TTC of LIDAR**
 
 | TTC_LIDAR |
