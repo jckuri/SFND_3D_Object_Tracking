@@ -17,10 +17,34 @@ https://www.udacity.com/course/sensor-fusion-engineer-nanodegree--nd313
 
 # FP.5 Performance Evaluation 1
 
+**TTC of LIDAR**
+
+| TTC_LIDAR |
+|-----------|
+| 12.51     |
+| 11.51     |
+| 15.47     |
+| 16.33     |
+| 16.23     |
+| 13.11     |
+| 12.47     |
+| 12.79     |
+| 12.8      |
+| 11.09     |
+| 12.7      |
+| 9.42      |
+| 9.97      |
+| 8.67      |
+| 8.46      |
+| 10.35     |
+| 9.68      |
+| 8.4       |
+
+![images/ttc_lidar.png](images/ttc_lidar.png)
 
 # FP.6 Performance Evaluation 2
 
-**Data of all combinations of detectors and descriptors**
+**TTCs of all combinations of detectors and descriptors**
 
 | TTC_LIDAR | TTC_CAMERA_SHITOMASI_BRISK | TTC_CAMERA_SHITOMASI_BRIEF | TTC_CAMERA_SHITOMASI_ORB | TTC_CAMERA_SHITOMASI_FREAK | TTC_CAMERA_FAST_BRISK | TTC_CAMERA_FAST_BRIEF | TTC_CAMERA_FAST_ORB | TTC_CAMERA_FAST_FREAK | TTC_CAMERA_BRISK_BRISK | TTC_CAMERA_BRISK_BRIEF | TTC_CAMERA_BRISK_ORB | TTC_CAMERA_BRISK_FREAK | TTC_CAMERA_ORB_BRIEF | TTC_CAMERA_AKAZE_BRIEF | TTC_CAMERA_AKAZE_ORB | TTC_CAMERA_AKAZE_FREAK | TTC_CAMERA_AKAZE_AKAZE | TTC_CAMERA_SIFT_BRISK | TTC_CAMERA_SIFT_BRIEF | TTC_CAMERA_SIFT_FREAK |
 |-----------|----------------------------|----------------------------|--------------------------|----------------------------|-----------------------|-----------------------|---------------------|-----------------------|------------------------|------------------------|----------------------|------------------------|----------------------|------------------------|----------------------|------------------------|------------------------|-----------------------|-----------------------|-----------------------|
