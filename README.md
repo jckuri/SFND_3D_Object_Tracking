@@ -69,6 +69,29 @@ https://www.udacity.com/course/sensor-fusion-engineer-nanodegree--nd313
 
 ![images/all_combinations.png](images/all_combinations.png)
 
+| Detector & Descriptor      | RMSE    |
+|----------------------------|---------|
+| TTC_CAMERA_AKAZE_BRIEF     | 1.7250  |
+| TTC_CAMERA_SIFT_BRISK      | 1.7434  |
+| TTC_CAMERA_AKAZE_AKAZE     | 1.7612  |
+| TTC_CAMERA_AKAZE_ORB       | 1.9963  |
+| TTC_CAMERA_SHITOMASI_BRISK | 1.9969  |
+| TTC_CAMERA_SIFT_FREAK      | 2.0050  |
+| TTC_CAMERA_AKAZE_FREAK     | 2.0850  |
+| TTC_CAMERA_SHITOMASI_FREAK | 2.1760  |
+| TTC_CAMERA_SHITOMASI_ORB   | 2.3067  |
+| TTC_CAMERA_SIFT_BRIEF      | 2.5985  |
+| TTC_CAMERA_SHITOMASI_BRIEF | 2.7481  |
+| TTC_CAMERA_BRISK_BRIEF     | 3.1940  |
+| TTC_CAMERA_FAST_ORB        | 3.6636  |
+| TTC_CAMERA_FAST_BRISK      | 4.8945  |
+| TTC_CAMERA_BRISK_BRISK     | 6.2411  |
+| TTC_CAMERA_BRISK_FREAK     | 6.3032  |
+| TTC_CAMERA_BRISK_ORB       | 6.4085  |
+| TTC_CAMERA_FAST_BRIEF      | 9.7233  |
+| TTC_CAMERA_FAST_FREAK      | 11.6108 |
+| TTC_CAMERA_ORB_BRIEF       | 16.7477 |
+
 **Top 5 combinations of detectors and descriptors**
 
 | TTC_LIDAR | TTC_CAMERA_SHITOMASI_BRISK | TTC_CAMERA_AKAZE_BRIEF | TTC_CAMERA_AKAZE_ORB | TTC_CAMERA_AKAZE_AKAZE | TTC_CAMERA_SIFT_BRISK | AVERAGE_TTC |
