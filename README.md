@@ -3,6 +3,23 @@
 Sensor Fusion Nanodegree
 https://www.udacity.com/course/sensor-fusion-engineer-nanodegree--nd313
 
+# Missing File
+
+The file `yolov3.weights` was too large (248,007,048 bytes) to be uploaded to
+this github repository. So, I deleted it. You need to copy the file 
+`yolov3.weights` again from a fresh Udacity workspace of this project, if you
+want to run the project without problems.
+
+```
+ls -l dat/yolo/
+total 277108
+-rw-r--r-- 1 root root       625 Jun  7  2019 coco.names
+-rw-r--r-- 1 root root      1914 Jun  7  2019 yolov3-tiny.cfg
+-rw-r--r-- 1 root root  35434956 Jun  7  2019 yolov3-tiny.weights
+-rw-r--r-- 1 root root      8342 Jun  7  2019 yolov3.cfg
+-rw-r--r-- 1 root root 248007048 Jun  7  2019 yolov3.weights
+```
+
 # FP.1 Match 3D Objects
 
 
