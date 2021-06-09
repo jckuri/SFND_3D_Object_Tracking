@@ -46,6 +46,31 @@ https://www.udacity.com/course/sensor-fusion-engineer-nanodegree--nd313
 
 **TTCs of all combinations of detectors and descriptors**
 
+Invalid combinations:
+- 'SHITOMASI_AKAZE.csv'
+- 'SHITOMASI_SIFT.csv'
+- 'HARRIS_BRISK.csv'
+- 'HARRIS_BRIEF.csv'
+- 'HARRIS_ORB.csv'
+- 'HARRIS_FREAK.csv'
+- 'HARRIS_AKAZE.csv'
+- 'HARRIS_SIFT.csv'
+- 'FAST_AKAZE.csv'
+- 'FAST_SIFT.csv'
+- 'BRISK_AKAZE.csv'
+- 'BRISK_SIFT.csv'
+- 'ORB_BRISK.csv'
+- 'ORB_ORB.csv'
+- 'ORB_FREAK.csv'
+- 'ORB_AKAZE.csv'
+- 'ORB_SIFT.csv'
+- 'AKAZE_BRISK.csv'
+- 'AKAZE_SIFT.csv'
+- 'SIFT_ORB.csv'
+- 'SIFT_AKAZE.csv'
+- 'SIFT_SIFT.csv'
+
+
 | TTC_LIDAR | TTC_CAMERA_SHITOMASI_BRISK | TTC_CAMERA_SHITOMASI_BRIEF | TTC_CAMERA_SHITOMASI_ORB | TTC_CAMERA_SHITOMASI_FREAK | TTC_CAMERA_FAST_BRISK | TTC_CAMERA_FAST_BRIEF | TTC_CAMERA_FAST_ORB | TTC_CAMERA_FAST_FREAK | TTC_CAMERA_BRISK_BRISK | TTC_CAMERA_BRISK_BRIEF | TTC_CAMERA_BRISK_ORB | TTC_CAMERA_BRISK_FREAK | TTC_CAMERA_ORB_BRIEF | TTC_CAMERA_AKAZE_BRIEF | TTC_CAMERA_AKAZE_ORB | TTC_CAMERA_AKAZE_FREAK | TTC_CAMERA_AKAZE_AKAZE | TTC_CAMERA_SIFT_BRISK | TTC_CAMERA_SIFT_BRIEF | TTC_CAMERA_SIFT_FREAK |
 |-----------|----------------------------|----------------------------|--------------------------|----------------------------|-----------------------|-----------------------|---------------------|-----------------------|------------------------|------------------------|----------------------|------------------------|----------------------|------------------------|----------------------|------------------------|------------------------|-----------------------|-----------------------|-----------------------|
 | 12.51     | 12.5                       | 13.99                      | 13.7                     | 12.52                      | 11.66                 | 12.18                 | 11.75               | 8.46                  | 11.06                  | 15.15                  | 18.45                | 14.41                  | 15.04                | 13.58                  | 11.92                | 11.8                   | 12.65                  | 13.15                 | 11.41                 | 16.92                 |
