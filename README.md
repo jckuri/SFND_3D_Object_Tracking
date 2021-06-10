@@ -290,13 +290,36 @@ Third, errors in the estimation algorithms.
 
 # FP.6 Performance Evaluation 2
 
+**Task:**
+
 Run several detector / descriptor combinations and look at the differences in TTC estimation. Find out which methods perform best and also include several examples where camera-based TTC estimation is way off. As with Lidar, describe your observations again and also look into potential reasons.
 
 All detector / descriptor combinations implemented in previous chapters have been compared with regard to the TTC estimate on a frame-by-frame basis. To facilitate comparison, a spreadsheet and graph should be used to represent the different TTCs. 
 
-**TTCs of all combinations of detectors and descriptors**
+**Method:**
 
-Invalid combinations:
+I parametrize the application so it receives the detector algorithm, the 
+descriptor algorithm, and a flag to show graphics or not. The application
+writes a file `DETECTOR_DESCRIPTOR.csv` with the TTC estimates.
+
+I computed all the possible combinations of detector algorithms and 
+descriptor algorithms with the Unix script `test_all_combinations.sh`:
+
+```
+for DETECTOR in "SHITOMASI" "HARRIS" "FAST" "BRISK" "ORB" "AKAZE" "SIFT"
+do
+	for DESCRIPTOR in "BRISK" "BRIEF" "ORB" "FREAK" "AKAZE" "SIFT"
+    do
+        ./3D_object_tracking $DETECTOR $DESCRIPTOR NO_GRAPHICS
+    done
+done
+```
+
+Then, I wrote a Python script `mix_csv.py` that reads the generated CSV files
+with the TTC estimates. This Python scripts discards the invalid combinations
+that generated runtime errors or that generated NAN and infinity numbers.
+
+Here is the list of all invalid combinations:
 - 'SHITOMASI_AKAZE.csv'
 - 'SHITOMASI_SIFT.csv'
 - 'HARRIS_BRISK.csv'
@@ -320,6 +343,10 @@ Invalid combinations:
 - 'SIFT_AKAZE.csv'
 - 'SIFT_SIFT.csv'
 
+The Python script `mix_csv.py` generated the following table with all the valid
+results:
+
+**TTCs of all combinations of detectors and descriptors**
 
 | TTC_LIDAR | TTC_CAMERA_SHITOMASI_BRISK | TTC_CAMERA_SHITOMASI_BRIEF | TTC_CAMERA_SHITOMASI_ORB | TTC_CAMERA_SHITOMASI_FREAK | TTC_CAMERA_FAST_BRISK | TTC_CAMERA_FAST_BRIEF | TTC_CAMERA_FAST_ORB | TTC_CAMERA_FAST_FREAK | TTC_CAMERA_BRISK_BRISK | TTC_CAMERA_BRISK_BRIEF | TTC_CAMERA_BRISK_ORB | TTC_CAMERA_BRISK_FREAK | TTC_CAMERA_ORB_BRIEF | TTC_CAMERA_AKAZE_BRIEF | TTC_CAMERA_AKAZE_ORB | TTC_CAMERA_AKAZE_FREAK | TTC_CAMERA_AKAZE_AKAZE | TTC_CAMERA_SIFT_BRISK | TTC_CAMERA_SIFT_BRIEF | TTC_CAMERA_SIFT_FREAK |
 |-----------|----------------------------|----------------------------|--------------------------|----------------------------|-----------------------|-----------------------|---------------------|-----------------------|------------------------|------------------------|----------------------|------------------------|----------------------|------------------------|----------------------|------------------------|------------------------|-----------------------|-----------------------|-----------------------|
@@ -342,7 +369,13 @@ Invalid combinations:
 | 9.68      | 10.4                       | 10.34                      | 9.21                     | 12.3                       | 9.81                  | 8.19                  | 10.42               | 11.4                  | 9.36                   | 8.95                   | 8.91                 | 10.77                  | 12.05                | 9.73                   | 9.18                 | 9.55                   | 9.06                   | 9.46                  | 9.19                  | 8.79                  |
 | 8.4       | 9.68                       | 8.41                       | 7.89                     | 9.25                       | 12.06                 | 12.67                 | 10.74               | 11.81                 | 11.73                  | 11.29                  | 12.08                | 9.7                    | 9.49                 | 9.47                   | 9.32                 | 10.05                  | 9.21                   | 8.74                  | 9.05                  | 10.56                 |
 
+I imported this CSV table to LibreOffice Calc and I produced this 3D graph:
+
 ![images/all_combinations.png](images/all_combinations.png)
+
+The Python script `mix_csv.py` also computes the RMSE between Lidar TTC and the
+TTC estimates for all the valid combinations of detector algorithms and 
+descriptor algorithms.
 
 | Detector & Descriptor      | RMSE    |
 |----------------------------|---------|
@@ -369,6 +402,16 @@ Invalid combinations:
 
 **Top 5 combinations of detectors and descriptors**
 
+The Top 5 combinations of algorithms are:
+
+| TTC_CAMERA_AKAZE_BRIEF     | 1.7250  |
+| TTC_CAMERA_SIFT_BRISK      | 1.7434  |
+| TTC_CAMERA_AKAZE_AKAZE     | 1.7612  |
+| TTC_CAMERA_AKAZE_ORB       | 1.9963  |
+| TTC_CAMERA_SHITOMASI_BRISK | 1.9969  |
+
+I selected those valid combinations of algorithms.
+
 | TTC_LIDAR | TTC_CAMERA_SHITOMASI_BRISK | TTC_CAMERA_AKAZE_BRIEF | TTC_CAMERA_AKAZE_ORB | TTC_CAMERA_AKAZE_AKAZE | TTC_CAMERA_SIFT_BRISK | AVERAGE_TTC |
 |-----------|----------------------------|------------------------|----------------------|------------------------|-----------------------|-------------|
 | 12.51     | 12.5                       | 13.58                  | 11.92                | 12.65                  | 13.15                 | 12.72       |
@@ -390,7 +433,29 @@ Invalid combinations:
 | 9.68      | 10.4                       | 9.73                   | 9.18                 | 9.06                   | 9.46                  | 9.59        |
 | 8.4       | 9.68                       | 9.47                   | 9.32                 | 9.21                   | 8.74                  | 9.14        |
 
+And I draw their results in LibreOffice calc.
+I included 2 additional columns: `TTC_LIDAR` and `AVERAGE_TTC`.
+
 ![images/top_5_combinations.png](images/top_5_combinations.png)
+
+`AVERAGE_TTC` is not a monotonically decreasing function as the cars moving in
+the video suggest. But `AVERAGE_TTC` is smoother than the other TTC curves.
+
+These ups and downs in the TTC instead of a monotonically decreasing function 
+as the cars in the video suggest could be caused by many reasons.
+
+First, the mathematical model to predict the TTC is based on a linear model of
+constant velocity without acceleration. In reality, the car in front is
+decelerating and so is the ego car.
+
+Second, both the car in front and the ego car are decelerating at different
+paces and have different velocities. That could explain the ups and downs in 
+the TTC estimates.
+
+Third, errors in the estimation algorithms.
+
+Fourth, cameras don't have depth information as lidar does. Depth in cameras
+is estimated by algorithms in an indirect way.
 
 -----------------------------------------------------------------------------------
 
