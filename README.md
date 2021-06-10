@@ -165,7 +165,13 @@ void clusterKptMatchesWithROI(BoundingBox &boundingBox, std::vector<cv::KeyPoint
 The function `computeTTCCamera` computes the time-to-collision in seconds for all matched 3D objects using only keypoint correspondences from the matched bounding boxes between current and previous frame.
 The code is able to deal with outlier correspondences in a statistically robust way to avoid severe estimation errors. 
 
-
+Basically, I iterate through all the combinations of keypoint matches.
+I compute the current distances between all the combinations of current keypoint matches.
+And I compute the previous distances between all the combinations of previous keypoint matches.
+I compute the distance ratios between the current distances and the previous distances.
+I eliminate the distance ratios in the maximum 20% and in the minimum 20%.
+I compute the median distance ratio by using only the selected distance ratios, to make this metric more robust.
+I compute the TTC by using the formula in the video lectures.
 
 ```
 double median(vector<double> xs) {
@@ -213,13 +219,20 @@ void computeTTCCamera(std::vector<cv::KeyPoint> &kptsPrev, std::vector<cv::KeyPo
 
 # FP.5 Performance Evaluation 1
 
-Find examples where the TTC estimate of the Lidar sensor does not seem plausible. Describe your observations and provide a sound argumentation why you think this happened.
-
-Several examples (2-3) have been identified and described in detail. The assertion that the TTC is off has been based on manually estimating the distance to the rear of the preceding vehicle from a top view perspective of the Lidar points.
+Here are good results with the best combination of detector and descriptor:
+AKAZE as detector and BRIEF as descriptor. As you can see both the TTC LIDAR
+and the TTC CAMERA are similar.
 
 ![images/Final_Results_TTC.png](images/Final_Results_TTC.png)
 
+Moreover, the object detection algorithm works well:
+
 ![images/Object_classification.png](images/Object_classification.png)
+
+**TASK:** Find examples where the TTC estimate of the Lidar sensor does not
+seem plausible. Describe your observations and provide a sound argumentation 
+why you think this happened. Several examples (2-3) have been identified and 
+described in detail.
 
 **TTC of LIDAR**
 
@@ -243,6 +256,24 @@ Several examples (2-3) have been identified and described in detail. The asserti
 | 16        | 10.35     |
 | 17        | 9.68      |
 | 18        | 8.4       |
+
+From the table and graph, we can see that the TTC LIDAR is not a monotonically
+decreasing function. It rather has bumps with ups and downs.
+
+For example, from iteration 2 to iteration 3, the TTC goes from 11.51 seconds
+to 15.47 seconds, which seems to be implausible.
+
+From iteration 3 to iteration 4, the TTC goes up again instead of going down, 
+from 15.47 seconds to 16.33 seconds, which seems to be wrong.
+
+From iteration 5 to iteration 6, the TTC goes down abruptly with a difference
+of more than 3 seconds in just 1 iteration, from 16.23 seconds to 13.11 seconds,
+which is not smooth as the movements of cars in the video.
+
+From iteration 15 to iteration 16, the TTC goes up again instead of going down, 
+from 8.46 seconds to 10.35 seconds, which seems to be wrong.
+
+
 
 ![images/ttc_lidar.png](images/ttc_lidar.png)
 
