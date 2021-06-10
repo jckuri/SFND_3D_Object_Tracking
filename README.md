@@ -1,6 +1,6 @@
 # SFND 3D Object Tracking
 
-Sensor Fusion Nanodegree
+Sensor Fusion Nanodegree<br/>
 https://www.udacity.com/course/sensor-fusion-engineer-nanodegree--nd313
 
 # Missing File
@@ -21,6 +21,10 @@ total 277108
 ```
 
 # FP.1 Match 3D Objects
+
+Implement the method "matchBoundingBoxes", which takes as input both the previous and the current data frames and provides as output the ids of the matched regions of interest (i.e. the boxID property). Matches must be the ones with the highest number of keypoint correspondences.
+
+Code is functional and returns the specified output, where each bounding box is assigned the match candidate with the highest number of occurrences. 
 
 ```
 void matchBoundingBoxes(std::vector<cv::DMatch> &matches, std::map<int, int> &best_matches, DataFrame &previous_frame, DataFrame &current_frame) {
@@ -60,6 +64,10 @@ void matchBoundingBoxes(std::vector<cv::DMatch> &matches, std::map<int, int> &be
 ```
 
 # FP.2 Compute Lidar-based TTC
+
+Compute the time-to-collision in second for all matched 3D objects using only Lidar measurements from the matched bounding boxes between current and previous frame. 
+
+Code is functional and returns the specified output. Also, the code is able to deal with outlier Lidar points in a statistically robust way to avoid severe estimation errors. 
 
 ```
 double median_x(std::vector<LidarPoint> lidar_points) {
@@ -107,6 +115,10 @@ void computeTTCLidar(std::vector<LidarPoint> &lidarPointsPrev,
 
 # FP.3 Associate Keypoint Correspondences with Bounding Boxes
 
+Prepare the TTC computation based on camera measurements by associating keypoint correspondences to the bounding boxes which enclose them. All matches which satisfy this condition must be added to a vector in the respective bounding box.
+
+Code performs as described and adds the keypoint correspondences to the "kptMatches" property of the respective bounding boxes. Also, outlier matches have been removed based on the euclidean distance between them in relation to all the matches in the bounding box. 
+
 ```
 // associate a given bounding box with the keypoints it contains
 void clusterKptMatchesWithROI(BoundingBox &boundingBox, std::vector<cv::KeyPoint> &kptsPrev, std::vector<cv::KeyPoint> &kptsCurr, std::vector<cv::DMatch> &kptMatches)
@@ -138,6 +150,10 @@ void clusterKptMatchesWithROI(BoundingBox &boundingBox, std::vector<cv::KeyPoint
 ```
 
 # FP.4 Compute Camera-based TTC
+
+Compute the time-to-collision in second for all matched 3D objects using only keypoint correspondences from the matched bounding boxes between current and previous frame.
+
+Code is functional and returns the specified output. Also, the code is able to deal with outlier correspondences in a statistically robust way to avoid severe estimation errors. 
 
 ```
 double median(vector<double> xs) {
@@ -185,6 +201,10 @@ void computeTTCCamera(std::vector<cv::KeyPoint> &kptsPrev, std::vector<cv::KeyPo
 
 # FP.5 Performance Evaluation 1
 
+Find examples where the TTC estimate of the Lidar sensor does not seem plausible. Describe your observations and provide a sound argumentation why you think this happened.
+
+Several examples (2-3) have been identified and described in detail. The assertion that the TTC is off has been based on manually estimating the distance to the rear of the preceding vehicle from a top view perspective of the Lidar points.
+
 ![images/Final_Results_TTC.png](images/Final_Results_TTC.png)
 
 ![images/Object_classification.png](images/Object_classification.png)
@@ -215,6 +235,10 @@ void computeTTCCamera(std::vector<cv::KeyPoint> &kptsPrev, std::vector<cv::KeyPo
 ![images/ttc_lidar.png](images/ttc_lidar.png)
 
 # FP.6 Performance Evaluation 2
+
+Run several detector / descriptor combinations and look at the differences in TTC estimation. Find out which methods perform best and also include several examples where camera-based TTC estimation is way off. As with Lidar, describe your observations again and also look into potential reasons.
+
+All detector / descriptor combinations implemented in previous chapters have been compared with regard to the TTC estimate on a frame-by-frame basis. To facilitate comparison, a spreadsheet and graph should be used to represent the different TTCs. 
 
 **TTCs of all combinations of detectors and descriptors**
 
