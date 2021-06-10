@@ -404,6 +404,8 @@ descriptor algorithms.
 
 The Top 5 combinations of algorithms are:
 
+| Detector & Descriptor      | RMSE    |
+|----------------------------|---------|
 | TTC_CAMERA_AKAZE_BRIEF     | 1.7250  |
 | TTC_CAMERA_SIFT_BRISK      | 1.7434  |
 | TTC_CAMERA_AKAZE_AKAZE     | 1.7612  |
