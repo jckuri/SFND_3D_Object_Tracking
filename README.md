@@ -221,7 +221,7 @@ void computeTTCCamera(std::vector<cv::KeyPoint> &kptsPrev, std::vector<cv::KeyPo
 
 Here are good results with the best combination of detector and descriptor:
 AKAZE as detector and BRIEF as descriptor. As you can see both the TTC LIDAR
-and the TTC CAMERA are similar.
+(9.67 seconds) and the TTC CAMERA (9.72 seconds) are similar.
 
 ![images/Final_Results_TTC.png](images/Final_Results_TTC.png)
 
