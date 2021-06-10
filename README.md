@@ -273,6 +273,8 @@ which is not smooth as the movements of cars in the video.
 From iteration 15 to iteration 16, the TTC goes up again instead of going down, 
 from 8.46 seconds to 10.35 seconds, which seems to be wrong.
 
+![images/ttc_lidar.png](images/ttc_lidar.png)
+
 These ups and downs in the TTC instead of a monotonically decreasing function 
 as the cars in the video suggest could be caused by many reasons.
 
@@ -285,8 +287,6 @@ paces and have different velocities. That could explain the ups and downs in
 the TTC estimates.
 
 Third, errors in the estimation algorithms.
-
-![images/ttc_lidar.png](images/ttc_lidar.png)
 
 # FP.6 Performance Evaluation 2
 
