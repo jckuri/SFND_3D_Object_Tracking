@@ -300,7 +300,7 @@ All detector / descriptor combinations implemented in previous chapters have bee
 
 I parametrize the application so it receives the detector algorithm, the 
 descriptor algorithm, and a flag to show graphics or not. The application
-writes a file `DETECTOR_DESCRIPTOR.csv` with the TTC estimates.
+writes a file `<DETECTOR>_<DESCRIPTOR>.csv` with the TTC estimates.
 
 I computed all the possible combinations of detector algorithms and 
 descriptor algorithms with the Unix script `test_all_combinations.sh`:
