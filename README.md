@@ -22,9 +22,11 @@ total 277108
 
 # FP.1 Match 3D Objects
 
-Implement the method "matchBoundingBoxes", which takes as input both the previous and the current data frames and provides as output the ids of the matched regions of interest (i.e. the boxID property). Matches must be the ones with the highest number of keypoint correspondences.
+The method `matchBoundingBoxes` takes as input the previous and the current data frames and provides as output the ids of the matched regions of interest (the boxID property). Matches are the ones with the highest number of keypoint correspondences. Each bounding box is assigned the match candidate with the highest number of occurrences. 
 
-Code is functional and returns the specified output, where each bounding box is assigned the match candidate with the highest number of occurrences. 
+In my code, I iterate through all the matches. I select the boxes that contain keypoints, both in the previous frame and in the current frame.
+I fill a matrix of counts and add 1 to all the combinations of selected boxes in the previous and current frame.
+Then I select the best matches based on that matrix of counts.
 
 ```
 void matchBoundingBoxes(std::vector<cv::DMatch> &matches, std::map<int, int> &best_matches, DataFrame &previous_frame, DataFrame &current_frame) {
@@ -65,9 +67,16 @@ void matchBoundingBoxes(std::vector<cv::DMatch> &matches, std::map<int, int> &be
 
 # FP.2 Compute Lidar-based TTC
 
-Compute the time-to-collision in second for all matched 3D objects using only Lidar measurements from the matched bounding boxes between current and previous frame. 
+The function `computeTTCLidar` computes the time-to-collision in seconds for all matched 3D objects using only Lidar measurements from the matched bounding boxes between current and previous frame. 
+The code is able to deal with outlier Lidar points in a statistically robust way to avoid severe estimation errors. 
 
-Code is functional and returns the specified output. Also, the code is able to deal with outlier Lidar points in a statistically robust way to avoid severe estimation errors. 
+I compute a special kind of median of `x` values for selected lidar points in the previous and current frames.
+Then I apply the formula in the video lectures to compute the TTC based on the median `x` values.
+
+The special kind of median of `x` values only uses selected lidar points.
+Lidar points are selected if their reflectivity values are not so far from the mean reflectivity.
+I also eliminate outliers which are in the maximum 20% and in the minimum 20%.
+Then I take the median of the selected `x` values.
 
 ```
 double median_x(std::vector<LidarPoint> lidar_points) {
