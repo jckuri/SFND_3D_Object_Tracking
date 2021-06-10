@@ -162,9 +162,10 @@ void clusterKptMatchesWithROI(BoundingBox &boundingBox, std::vector<cv::KeyPoint
 
 # FP.4 Compute Camera-based TTC
 
-Compute the time-to-collision in second for all matched 3D objects using only keypoint correspondences from the matched bounding boxes between current and previous frame.
+The function `computeTTCCamera` computes the time-to-collision in seconds for all matched 3D objects using only keypoint correspondences from the matched bounding boxes between current and previous frame.
+The code is able to deal with outlier correspondences in a statistically robust way to avoid severe estimation errors. 
 
-Code is functional and returns the specified output. Also, the code is able to deal with outlier correspondences in a statistically robust way to avoid severe estimation errors. 
+
 
 ```
 double median(vector<double> xs) {
