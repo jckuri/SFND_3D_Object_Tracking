@@ -74,7 +74,7 @@ I compute a special kind of median of `x` values for selected lidar points in th
 Then I apply the formula in the video lectures to compute the TTC based on the median `x` values.
 
 The special kind of median of `x` values only uses selected lidar points.
-Lidar points are selected if their reflectivity values are not so far from the mean reflectivity.
+Lidar points are selected if their reflectivity values are not so far away from the mean reflectivity.
 I also eliminate outliers which are in the maximum 20% and in the minimum 20%.
 Then I take the median of the selected `x` values.
 
@@ -124,9 +124,11 @@ void computeTTCLidar(std::vector<LidarPoint> &lidarPointsPrev,
 
 # FP.3 Associate Keypoint Correspondences with Bounding Boxes
 
-Prepare the TTC computation based on camera measurements by associating keypoint correspondences to the bounding boxes which enclose them. All matches which satisfy this condition must be added to a vector in the respective bounding box.
+The function `clusterKptMatchesWithROI` prepares the TTC computation based on camera measurements by associating keypoint correspondences to the bounding boxes which enclose them. All matches which satisfy this condition must be added to a vector in the respective bounding box. The code adds the keypoint correspondences to the "kptMatches" property of the respective bounding boxes. Also, outlier matches have been removed based on the euclidean distance between them in relation to all the matches in the bounding box. 
 
-Code performs as described and adds the keypoint correspondences to the "kptMatches" property of the respective bounding boxes. Also, outlier matches have been removed based on the euclidean distance between them in relation to all the matches in the bounding box. 
+I iterate through all keypoint matches.
+If the bounding box contains the keypoint matches, the keypoints are added to the bounding box matches and the distances from the previous keypoints to the current keypoints are added to the array of distances.
+Matches and keypoints are added to the bounding box only if the distances do not exceed a statistical distance threshold: 1.50 * mean distance.
 
 ```
 // associate a given bounding box with the keypoints it contains
