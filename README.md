@@ -319,7 +319,7 @@ Then, I wrote a Python script `mix_csv.py` that reads the generated CSV files
 with the TTC estimates. This Python scripts discards the invalid combinations
 that generated runtime errors or that generated NAN and infinity numbers.
 
-Here is the list of all invalid combinations:
+Here is the list of all **invalid** combinations:
 - 'SHITOMASI_AKAZE.csv'
 - 'SHITOMASI_SIFT.csv'
 - 'HARRIS_BRISK.csv'
